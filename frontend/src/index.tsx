@@ -1,22 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { createStore, combineReducers } from 'redux';
-import { Provider } from 'react-redux';
+import { createRoot } from "react-dom/client"
 
 // Local imports
-import App from './App';
-import appReducer from './redux/app-reducer';
-import authReducer from './redux/auth-reducer';
-import './index.scss';
+import App from "./App"
 
-const rootReducer = combineReducers({ auth: authReducer, app: appReducer });
-
-const store = createStore(rootReducer);
-
-ReactDOM.render(
-  // <React.StrictMode></React.StrictMode>
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
-);
+const container = document.getElementById("root")
+const root = createRoot(container!)
+root.render(<App />)

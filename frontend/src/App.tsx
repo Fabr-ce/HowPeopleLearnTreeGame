@@ -1,24 +1,53 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { createContext, useContext, useEffect, useState } from "react"
+import { io, Socket } from "socket.io-client"
+import { gameState } from "./types"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import Main from "./Components/Main"
+import Game from "./Components/Game"
 
-// Local Imports
-import AppView from './views/AppView/index';
-import AuthView from './views/AuthView/index';
+import "./index.css"
 
-interface IRootState {
-  auth: {
-    isLogged: boolean;
-    id: string | null;
-    username: string | null;
-    image: string | null;
-    token: string | null;
-  };
+const SocketContext = createContext<Socket>({} as Socket)
+
+export function useSocket() {
+	return useContext(SocketContext)
+}
+
+const GameStateContext = createContext<gameState | null>(null)
+
+export function useGameState() {
+	return useContext(GameStateContext)
 }
 
 const App: React.FC = () => {
-  const isAuth = useSelector((state: IRootState) => state.auth.isLogged);
+	const [socket, setSocket] = useState<Socket | null>(null)
+	const [gameState, setGameState] = useState<gameState | null>(null)
 
-  return isAuth ? <AppView /> : <AuthView />;
-};
+	useEffect(() => {
+		const socket = io(process.env.REACT_APP_SOCKET_URL!, { transports: ["websocket"] })
+		socket.on("gameState", (newGameState: gameState) => setGameState(newGameState))
+		setSocket(socket)
+	}, [])
+	if (socket == null)
+		return (
+			<div className="p-5">
+				Connecting to server
+				<span className="loading loading-spinner loading-md ml-2"></span>
+			</div>
+		)
 
-export default App;
+	return (
+		<SocketContext.Provider value={socket}>
+			<GameStateContext.Provider value={gameState}>
+				<BrowserRouter>
+					<Routes>
+						<Route path="/" element={<Main />} />
+						<Route path="/:gameId" element={<Game />} />
+					</Routes>
+				</BrowserRouter>
+			</GameStateContext.Provider>
+		</SocketContext.Provider>
+	)
+}
+
+export default App

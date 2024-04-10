@@ -1,27 +1,25 @@
 {
-  "name": "group-chat",
-  "version": "1.0.0",
-  "description": "Instant messaging app project",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
-  },
-  "author": "Killian Frappart",
-  "license": "ISC",
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "express-validator": "^6.9.2",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.11.8",
-    "mongoose-unique-validator": "^2.0.3",
-    "random-avatar-generator": "^2.0.0",
-    "socket.io": "^3.0.4"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.6"
-  }
+	"name": "group-chat",
+	"version": "1.0.0",
+	"description": "Instant messaging app project",
+	"main": "server.ts",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "ts-node app.ts"
+	},
+	"author": "Killian Frappart",
+	"license": "ISC",
+	"dependencies": {
+		"cors": "^2.8.5",
+		"dotenv": "^16.4.5",
+		"express": "^4.19.2",
+		"random-avatar-generator": "^2.0.0",
+		"socket.io": "^4.7.5"
+	},
+	"devDependencies": {
+		"@types/express": "^4.17.21",
+		"nodemon": "^3.1.0",
+		"ts-node": "^10.9.2",
+		"typescript": "^5.4.3"
+	}
 }
