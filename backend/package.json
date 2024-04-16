@@ -2,7 +2,7 @@
 	"name": "tree_harvesting_app",
 	"version": "1.0.0",
 	"description": "Tree harvesting app project",
-	"main": "server.ts",
+	"main": "node ./dist/server.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "ts-node app.ts"
