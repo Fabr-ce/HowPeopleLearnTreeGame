@@ -1,6 +1,6 @@
 cd backend
-npm i
+npm i --also=dev
 cd ../frontend
-npm i
+npm i --also=dev
 npm run build
 mv build ../backend/build
