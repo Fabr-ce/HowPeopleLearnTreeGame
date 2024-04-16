@@ -1,7 +1,7 @@
 cd backend
-npm i --also=dev
+npm i --include=dev
 rm -rf build
 cd ../frontend
-npm i --also=dev
+npm i --include=dev
 npm run build
 cp -r build ../backend/build
