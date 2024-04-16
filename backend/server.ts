@@ -2,14 +2,23 @@ import dotenv from "dotenv"
 dotenv.config()
 
 import cors from "cors"
-import express from "express"
+import express, { Request, Response } from "express"
 import http from "http"
 import { Server } from "socket.io"
+import path from "path"
 import registerServerSocket from "./src/socket"
 
 const app = express()
 app.use(express.json())
-app.use(cors())
+
+if (process.env.NODE_ENV === "development") app.use(cors())
+
+// Add
+app.use(express.static(path.join(__dirname, "./build")))
+
+app.get("*", (req: Request, res: Response) => {
+	res.sendFile(path.join(__dirname, "./build", "index.html"))
+})
 
 // Socket.io
 const server = http.createServer(app)

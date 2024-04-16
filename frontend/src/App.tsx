@@ -24,7 +24,8 @@ const App: React.FC = () => {
 	const [gameState, setGameState] = useState<gameState | null>(null)
 
 	useEffect(() => {
-		const socket = io(process.env.REACT_APP_SOCKET_URL!, { transports: ["websocket"] })
+		const isDevelopment = !process.env.NODE_ENV || process.env.NODE_ENV === "development"
+		const socket = isDevelopment ? io(process.env.REACT_APP_SOCKET_URL!, { transports: ["websocket"] }) : io()
 		socket.on("gameState", (newGameState: gameState) => setGameState(newGameState))
 		setSocket(socket)
 	}, [])
