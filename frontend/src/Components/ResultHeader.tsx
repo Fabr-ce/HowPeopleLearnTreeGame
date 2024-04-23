@@ -11,7 +11,7 @@ export default function ResultHeader({ game }: { game: gameState }) {
 		<div className="w-full flex items-center justify-center">
 			<div className="stats stats-vertical lg:stats-horizontal">
 				<div className="stat">
-					<div className="stat-title">Total trees left</div>
+					<div className="stat-title">Total trees for next decade</div>
 					<div className="stat-value">{game.treesLeft || 0}</div>
 				</div>
 

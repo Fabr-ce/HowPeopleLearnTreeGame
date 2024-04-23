@@ -1,7 +1,19 @@
+import questions from "./questions.json"
+
 export type roundParams = {
 	decadeResultsHidden: boolean
 }
 export type decadeDecision = { amount: number }
+export type question = {
+	question: string
+	A: string
+	B: string
+	C: string
+	D: string
+	solution: string
+	explanation?: string
+}
+
 export type gameState = {
 	id: number
 	adminId: string | null
@@ -17,7 +29,10 @@ export type gameState = {
 		name: string
 		decisions: decadeDecision[]
 		treeCount: number
+		questionCount: number
 	}[]
+	currentQuestion?: question
+	showQuestionSolution: boolean
 }
 
 // amount has to be 0!!
@@ -37,11 +52,16 @@ class Game {
 	runningDecade = false
 	inRoundRules = false
 	playersDecidedThisDecade = 0
+	playersQuestionAwnsered = 0
 	nextDecade = 0
 	treesLeft = 0
 
 	roundParams: roundParams = standardRoundParam
 	roundNr: number = -1
+
+	nextQuestionIndex = 0
+	currentQuestion?: question
+	showQuestionSolution = false
 
 	constructor(id: number) {
 		this.id = id
@@ -53,9 +73,15 @@ class Game {
 			player.startGame(params)
 		}
 		this.playersDecidedThisDecade = 0
+		this.playersQuestionAwnsered = 0
 		this.inRoundRules = false
 		this.runningDecade = true
 		this.treesLeft = treePerPerson * this.players.size
+
+		this.nextDecade = 0
+
+		this.currentQuestion = undefined
+		this.showQuestionSolution = false
 
 		this.roundParams = params
 		this.roundNr++
@@ -65,6 +91,19 @@ class Game {
 		if (!this.finishedRound) {
 			this.runningDecade = true
 			this.playersDecidedThisDecade = 0
+			this.playersQuestionAwnsered = 0
+		}
+
+		if (this.showQuestionSolution) {
+			this.currentQuestion = undefined
+			this.showQuestionSolution = false
+			this.nextQuestionIndex++
+		} else {
+			if ([3, 6, 9].includes(this.nextDecade)) {
+				this.currentQuestion = questions[this.nextQuestionIndex]
+			} else {
+				this.currentQuestion = undefined
+			}
 		}
 	}
 
@@ -92,6 +131,7 @@ class Game {
 			name: p.name,
 			decisions: p.decisions,
 			treeCount: p.treeCount,
+			questionCount: p.questionsCorrect,
 		}))
 		return {
 			id: this.id,
@@ -104,6 +144,8 @@ class Game {
 			roundNr: this.roundNr,
 			roundParams: this.roundParams,
 			players: playerInfos,
+			currentQuestion: this.currentQuestion,
+			showQuestionSolution: this.showQuestionSolution,
 		}
 	}
 
@@ -137,8 +179,22 @@ class Game {
 		}
 	}
 
+	addQuestionDecision(socketId: string, decision: string) {
+		const player = this.players.get(socketId)
+		if (!this.currentQuestion || this.showQuestionSolution || !player || !this.runningDecade) return
+		this.playersQuestionAwnsered++
+		if (decision === this.currentQuestion.solution) {
+			player.questionsCorrect++
+			player.treeCount++
+		}
+	}
+
 	checkAllDecided() {
 		return this.playersDecidedThisDecade === this.players.size || this.treesLeft === 0
+	}
+
+	checkAllQuestionAwnsered() {
+		return this.playersQuestionAwnsered === this.players.size
 	}
 
 	removePlayer(socketId: string) {
@@ -159,6 +215,8 @@ class Player {
 	treeCount: number = 0
 	lastDecision: number = -1
 
+	questionsCorrect: number = 0
+
 	constructor(socketId: string, name: string) {
 		this.socketId = socketId
 		this.name = name
@@ -168,6 +226,7 @@ class Player {
 		this.treeCount = 0
 		this.decisions = []
 		this.lastDecision = -1
+		this.questionsCorrect = 0
 	}
 
 	decide(decade: number, decision: decadeDecision): boolean {

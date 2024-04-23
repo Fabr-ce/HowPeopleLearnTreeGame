@@ -42,6 +42,9 @@ export default function Decade({ game }: { game: gameState }) {
 			<div className="w-full flex justify-center mb-3">
 				<progress className="progress progress-secondary h-4 max-w-sm" value={progress} max="100"></progress>
 			</div>
+			<div className="absolute top-5 right-5 rounded-lg bg-base-300 inline-flex p-4 text-xl font-bold text-white">
+				Total: {game.treesLeft}x<FaTree size="1.7rem" className="ml-.5" />
+			</div>
 
 			<div className="grid grid-cols-2 gap-4 p-1">
 				{possibilities.map(p => (

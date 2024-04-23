@@ -2,6 +2,16 @@ export type roundParams = {
 	decadeResultsHidden: boolean
 }
 export type decadeDecision = { amount: number }
+export type question = {
+	question: string
+	A: string
+	B: string
+	C: string
+	D: string
+	solution: string
+	explanation?: string
+}
+
 export type gameState = {
 	id: number
 	adminId: string | null
@@ -17,5 +27,8 @@ export type gameState = {
 		name: string
 		decisions: decadeDecision[]
 		treeCount: number
+		questionCount: number
 	}[]
+	currentQuestion?: question
+	showQuestionSolution: boolean
 }

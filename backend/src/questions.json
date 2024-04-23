@@ -1,0 +1,118 @@
+[
+	{
+		"question": "In terms of CO2 emissions, which of the following actions is generally the most effective in reducing an individual's carbon footprint?",
+		"A": "Installing energy-efficient light bulbs at home",
+		"B": "Buying locally produced food ",
+		"C": "Carpooling to work with coworkers over small distances",
+		"D": "Unplugging electronic devices when not in use",
+		"solution": "B"
+	},
+	{
+		"question": "What percentage of global greenhouse gas emissions does the fashion industry contribute?",
+		"A": "2%",
+		"B": "5%",
+		"C": "10%",
+		"D": "20%",
+		"solution": "C",
+		"explanation": "The fashion industry contributes to around 10% of global greenhouse gas emissions due to its long supply chains and energy-intensive production. By choosing to buy less and better-quality items, we can reduce this impact."
+	},
+	{
+		"question": "How much water is saved by turning off the tap while brushing your teeth?",
+		"A": "1 liter",
+		"B": "6 liters",
+		"C": "12 liters",
+		"D": "24 liters",
+		"solution": "C",
+		"explanation": "Turning off the tap while brushing your teeth can save around 12 liters of water each time. If each adult in England and Wales turned off the tap when brushing their teeth, we'd save enough water for nearly 500,000 homes or to fill 180 Olympic swimming pools - every day!"
+	},
+	{
+		"question": "How much CO2 does one cycling commuter save in a year (for a round trip commute of 10 miles, or 16 km, commuting 5 days a week, 48 weeks a year)?",
+		"A": "3 kg CO2e",
+		"B": "130 kg CO2e",
+		"C": "300 kg CO2e",
+		"D": "700 kg CO2e",
+		"solution": "D",
+		"explanation": "For a round trip commute of 10 miles, or 16 km, commuting 5 days a week, 48 weeks a year, this results in saving about 700 kg CO2e. This is roughly equivalent to a one-way economy-class flight between San Francisco and New York."
+	},
+
+	{
+		"question": "A single tree produces enough air to supply in its lifetime for how many people for a year?",
+		"A": "1",
+		"B": "2",
+		"C": "3",
+		"D": "4",
+		"solution": "D",
+		"explanation": "A tree produces in its lifetime oxygen to supply 4 persons a year. Take care of trees!"
+	},
+	{
+		"question": "Which emits the least CO2 in terms of energy consumption: driving a km in a thermic car or driving a km in an electric car charged by a coal-fired power plant?",
+		"A": "Electric car charged by coal-fired power plant",
+		"B": "Thermic car",
+		"C": "It's the same",
+		"D": "A tank",
+		"solution": "A",
+		"explanation": "It comes from the fact that coal-fired power plants are way more efficient than motors of thermic car. Even in countries like Poland where the energy mix is mainly coal-based, an electric car emits less CO2 than thermic car in the long term."
+	},
+	{
+		"question": "How many kilometers need to be driven for an electric car to emits less CO2 than a thermic car for its whole lifetime with usual electric production facilities that are similar to one found in Western Europe. ",
+		"A": "Less than 10 000km",
+		"B": "Between 10 000km and 60 000km ",
+		"C": "Between 60 000km and 150 000km",
+		"D": "Between 150 000km and 250 000km",
+		"solution": "C",
+		"explanation": "The value depends on the type of thermic car used and the energy mix of the country/area"
+	},
+	{
+		"question": "What percentage of food is wasted globally each year?",
+		"A": "10%",
+		"B": "30%",
+		"C": "50%",
+		"D": "60%",
+		"solution": "B",
+		"explanation": "Approximately one-third (30%) of food produced for human consumption is lost or wasted globally. This amounts to about 1.3 billion tons per year, worth approximately US$1 trillion. All the food produced but never eaten would be sufficient to feed two billion people. That's more than twice the number of undernourished people across the globe. If wasted food were a country, it would be the third-largest producer of CO2 in the world, after the USA and China."
+	},
+	{
+		"question": "In terms of CO2 consumption, what is the meat consumption (50% chicken, 30% pork, 20% beef) equivalent to flying by airplane from Washington DC to San Francisco (4000km)?",
+		"A": "200g (a steak)",
+		"B": "1kg",
+		"C": "10kg",
+		"D": "40kg",
+		"solution": "D",
+		"explanation": "If you are frequently flying, eating meat, and looking to improve your CO2 impact, skipping a couple of trips per year is the most efficient option !"
+	},
+	{
+		"question": "How much energy consumption do you save by putting your house temperature at 18°C instead of 20°C in winter?",
+		"A": "2%",
+		"B": "10%",
+		"C": "5%",
+		"D": "20%",
+		"solution": "D"
+	},
+	{
+		"question": "If every person in the US replaced just one beef burger per week with a plant-based Beyond Burger, it would be the equivalent of taking X cars off the road",
+		"A": "2000",
+		"B": "12 millions",
+		"C": "100 000",
+		"D": "1 million",
+		"solution": "B",
+		"explanation": "Decreasing by a small amount our meat consumption has a great impact."
+	},
+	{
+		"question": "If you turn down your main thermostat by 1 degree, what would be the % of energy savings, on average in the UK?",
+		"A": "10%",
+		"B": "5%",
+		"C": "20%",
+		"D": "1%",
+		"solution": "A",
+		"explanation": "If you turn down your main thermostat by 1 degree, you can save around 10% on your energy bill. However, don't get sick, the ideal temperature range to set your thermostat is 18-21°C."
+	},
+	{
+		"question": "The Amazon rainforest produces how many % of the planet's oxygen ?",
+		"A": "1%",
+		"B": "20%",
+		"C": "50%",
+		"D": "90%",
+		"solution": "B",
+		"explanation": "A fifth of the planet's oxygen is produced by the Amazon rainforest. Take care of trees!"
+	}
+]

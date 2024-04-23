@@ -6,6 +6,7 @@ import GameRules from "./GameRules"
 import Decade from "./Decade"
 import DecadeResult from "./DecadeResult"
 import Results from "./Results"
+import Question from "./Question"
 
 export default function Game() {
 	const { gameId } = useParams()
@@ -34,6 +35,7 @@ export default function Game() {
 	const isNotInGame = !gameState?.players.find(p => p.socketId === socket.id)
 	if (gameState === null || !gameIsRunning || isNotInGame) return <Lobby game={gameState} />
 	else if (gameState.inRoundRules) return <GameRules game={gameState} />
+	else if (gameState.currentQuestion) return <Question game={gameState} />
 	else if (gameState.runningDecade) return <Decade game={gameState} />
 	else if (!gameState.finishedRound) return <DecadeResult game={gameState} />
 	else return <Results game={gameState} />
