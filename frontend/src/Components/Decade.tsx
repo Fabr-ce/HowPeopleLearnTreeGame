@@ -39,11 +39,17 @@ export default function Decade({ game }: { game: gameState }) {
 			<div>
 				<h2 className="text-3xl text-center w-full font-bold mt-2 mb-5">Decade {game.nextDecade + 1}</h2>
 			</div>
-			<div className="w-full flex justify-center mb-3">
+			<div className="w-full flex justify-center mb-4">
 				<progress className="progress progress-secondary h-4 max-w-sm" value={progress} max="100"></progress>
 			</div>
-			<div className="absolute top-5 right-5 rounded-lg bg-base-300 inline-flex p-4 text-xl font-bold text-white">
-				Total: {game.treesLeft}x<FaTree size="1.7rem" className="ml-.5" />
+			<div className="flex justify-between gap-2 my-3">
+				<div className="rounded-lg bg-base-300 inline-flex p-3 font-bold text-white mb-1">
+					Trees left: {game.treesLeft}x<FaTree size="1.7rem" className="ml-.5" />
+				</div>
+				<div className="rounded-lg bg-base-300 inline-flex p-3 font-bold text-white mb-1">
+					You have: {game.players.find(p => p.socketId === socket.id)?.treeCount}x
+					<FaTree size="1.7rem" className="ml-.5" />
+				</div>
 			</div>
 
 			<div className="grid grid-cols-2 gap-4 p-1">

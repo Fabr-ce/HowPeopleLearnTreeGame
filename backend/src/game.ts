@@ -202,6 +202,7 @@ class Game {
 		if (socketId === this.adminId) {
 			this.adminId = Array.from(this.players.values())?.[0]?.socketId ?? null
 		}
+		return this.players.size === 0
 	}
 }
 

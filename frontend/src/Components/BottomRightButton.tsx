@@ -18,7 +18,7 @@ export default function BottomRightButton({
 	}
 
 	return isAdmin ? (
-		<button className="btn btn-primary min-w-sm absolute bottom-4 right-4" onClick={emitEvent}>
+		<button className="btn btn-primary min-w-sm fixed bottom-4 right-4" onClick={emitEvent}>
 			{title}
 		</button>
 	) : null

@@ -114,5 +114,22 @@
 		"D": "90%",
 		"solution": "B",
 		"explanation": "A fifth of the planet's oxygen is produced by the Amazon rainforest. Take care of trees!"
+	},
+	{
+		"question": "To travel between islands, how much CO2 do cruise ships emit compared to ferrys?",
+		"A": "Same",
+		"B": "1.5 times more",
+		"C": "10 times more",
+		"D": "6 times more",
+		"solution": "D"
+	},
+	{
+		"question": "For ski holidays, which of the following represents the biggest carbon footprint? ",
+		"A": "Transport",
+		"B": "Gear",
+		"C": "Ski area",
+		"D": "Housing",
+		"solution": "A",
+		"explanation": "Transport accounts for 52% of the carbon footprint of ski resorts. The next big item is housing (21%). Then ski gear (16%), alimentation (8%) and finally ski area with 2% of emissions. To reduce the ecological impact of a ski day, one should for example avoid flying and driving and get to the ski resort by train/public transport or favour second hand gear/rent the equipment."
 	}
 ]

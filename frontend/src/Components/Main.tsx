@@ -38,7 +38,7 @@ export default function Main() {
 					<input
 						value={gameId}
 						onChange={e => changeGameId(e.target.value)}
-						type="text"
+						type="number"
 						name="gameId"
 						placeholder="Game PIN"
 						className={classNames("w-full input input-bordered bg-neutral/10 mb-2")}

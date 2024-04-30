@@ -6,6 +6,9 @@ export default function Results({ game }: { game: gameState }) {
 	return (
 		<div className="p-4">
 			<h2 className="text-3xl text-center w-full font-bold mt-2 mb-5">Round Results</h2>
+			<div className="alert alert-info">
+				This Round is over. It lasted {game.nextDecade} rounds. You have {game.treesLeft} trees left.
+			</div>
 			<ResultHeader game={game} />
 			<div className="overflow-x-auto py-5">
 				<table className="table bg-base-200">

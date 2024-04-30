@@ -1,5 +1,6 @@
 import { Server, Socket } from "socket.io"
 import { games, socketGameMap } from "."
+import Game from "../game"
 
 const registerLobby = (io: Server, socket: Socket) => {
 	socket.on("gameLobby", (gameId: string) => {
@@ -36,9 +37,12 @@ const registerLobby = (io: Server, socket: Socket) => {
 	socket.on("disconnect", () => {
 		const game = socketGameMap.get(socket.id)
 		if (game) {
-			game.removePlayer(socket.id)
-			io.to(game.socketRoom).emit("gameState", game.getGameState())
+			const isEmpty = game.removePlayer(socket.id)
 			socketGameMap.delete(socket.id)
+			io.to(game.socketRoom).emit("gameState", game.getGameState())
+			if (isEmpty) {
+				games[games.indexOf(game)] = new Game(game.id)
+			}
 		}
 	})
 }

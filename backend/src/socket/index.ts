@@ -7,10 +7,6 @@ import registerGame from "./game"
 export const games: Game[] = []
 export const socketGameMap = new Map<string, Game>()
 
-if (games.length == 0) {
-	games.push(new Game(1234))
-}
-
 export const decisionTimeInSeconds = 30
 
 const registerServerSocket = (io: Server, socket: Socket) => {
