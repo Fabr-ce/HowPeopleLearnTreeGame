@@ -1,7 +1,21 @@
 export type roundParams = {
 	decadeResultsHidden: boolean
+	sendPolicePossible: boolean // send police to check others dont take more than 2 trees
+	stealProtectionPayment: boolean // protect yourself from beeing stolen
+	sayNumberOfTrees: boolean // say it in the group
+
+	payToSeeDecadeResult: boolean // see the choices of all the players this round
+
+	stealTreesPossible: boolean
 }
-export type decadeDecision = { amount: number }
+export type decadeDecision = {
+	amount: number
+	sendPolice?: boolean
+	stealProtection?: boolean
+	seeDecadeResult?: boolean
+	stealTrees?: string
+}
+
 export type question = {
 	question: string
 	A: string
@@ -17,6 +31,7 @@ export type gameState = {
 	adminId: string | null
 	nextDecade: number
 	finishedRound: boolean
+	inDiscussion: boolean
 	runningDecade: boolean
 	inRoundRules: boolean
 	treesLeft: number
@@ -28,6 +43,10 @@ export type gameState = {
 		decisions: decadeDecision[]
 		treeCount: number
 		questionCount: number
+		treesStolen: number
+		lastStolen: number
+		lastSuccessfullSteal: number
+		lastPoliceFine: number
 	}[]
 	currentQuestion?: question
 	showQuestionSolution: boolean

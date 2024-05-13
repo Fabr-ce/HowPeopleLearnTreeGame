@@ -1,43 +1,80 @@
 import classNames from "classnames"
 import { gameState } from "../types"
 import BottomRightButton from "./BottomRightButton"
-import { useSocket } from "../App"
 import ResultHeader from "./ResultHeader"
+import { useSocket } from "../App"
 
 export default function DecadeResult({ game }: { game: gameState }) {
+	const socket = useSocket()
+	const selfPlayer = game.players.find(p => p.socketId === socket.id)
+	const curentDecision = selfPlayer!.decisions[game.nextDecade - 1]
+	const stolePlayer = game.players.find(p => p.socketId === curentDecision.stealTrees)?.decisions[game.nextDecade - 1]
+
 	return (
 		<div className="p-4">
 			<h2 className="text-3xl text-center w-full font-bold mt-2 mb-5">Result Decade {game.nextDecade}</h2>
 			<ResultHeader game={game} />
-			{!game.roundParams.decadeResultsHidden && (
-				<div className="grid grid-cols-2 gap-3 w-full text-white">
-					{game.players.map(p => {
-						const lastDecision = p.decisions[game.nextDecade - 1]?.amount
-						return (
-							<div key={p.socketId} className="rounded bg-base-300 p-4">
-								<h5 className="text-lg text-center w-full mb-2 font-bold">{p.name}</h5>
-								<p className="mb-2">Total Trees: {p.treeCount}</p>
-								<div className="flex items-center justify-center w-full">
-									<div
-										className={classNames(
-											"rounded p-2 bg-secondary h-10 w-10 text-center font-bold",
-											{
-												"bg-success/60": lastDecision === 0,
-												"bg-warning/60": lastDecision === 1 || lastDecision === 2,
-												"bg-error/60": lastDecision === 3,
-											}
-										)}
-									>
-										{lastDecision}
-									</div>
-								</div>
-							</div>
-						)
-					})}
+
+			{game.roundParams.sendPolicePossible && selfPlayer?.lastPoliceFine === game.nextDecade - 1 && (
+				<div className="alert alert-warning my-3">
+					You got caught by the police when taking more than 2 trees! You get a penalty of 3 trees.
 				</div>
 			)}
 
-			<BottomRightButton adminId={game.adminId} event="decadeStartRequest" title="Next Decade" />
+			{game.roundParams.stealTreesPossible && selfPlayer?.lastStolen === game.nextDecade - 1 && (
+				<div className="alert alert-warning my-3">You got robbed by the another player taking 3 trees!</div>
+			)}
+
+			{game.roundParams.stealTreesPossible && selfPlayer?.lastSuccessfullSteal === game.nextDecade - 1 && (
+				<div className="alert alert-success my-3">You successfully stole 3 trees!</div>
+			)}
+
+			{game.roundParams.stealTreesPossible &&
+				curentDecision.stealTrees !== undefined &&
+				selfPlayer?.lastSuccessfullSteal !== game.nextDecade - 1 &&
+				(stolePlayer?.stealProtection ? (
+					<div className="alert alert-warning my-3">The other player protected against thieves</div>
+				) : (
+					<div className="alert alert-warning my-3">
+						You got caught trying to steal 3 trees! You get a penalty of 10 trees.
+					</div>
+				))}
+
+			{game.roundParams.sayNumberOfTrees && (
+				<div className="alert alert-info my-3">
+					You should now tell the others how many trees you chopped and what is the plan for the next round.
+					(Who knows it you say the truth :D)
+				</div>
+			)}
+			{(!game.roundParams.decadeResultsHidden ||
+				(game.roundParams.payToSeeDecadeResult && curentDecision.seeDecadeResult)) && (
+				<table className="table bg-base-200 mt-4">
+					{/* head */}
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Total</th>
+							<th>Decade {game.nextDecade}</th>
+						</tr>
+					</thead>
+					<tbody>
+						{game.players
+							.sort((a, b) => b.treeCount - a.treeCount)
+							.map(p => {
+								const lastDecision = p.decisions[game.nextDecade - 1]?.amount
+								return (
+									<tr key={p.socketId}>
+										<td>{p.name}</td>
+										<td>{p.treeCount}</td>
+										<td>{lastDecision ?? 0}</td>
+									</tr>
+								)
+							})}
+					</tbody>
+				</table>
+			)}
+
+			<BottomRightButton adminId={game.adminId} event="decadeStartRequest" title="Next Decade" wait />
 		</div>
 	)
 }

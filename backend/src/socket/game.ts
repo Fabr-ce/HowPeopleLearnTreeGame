@@ -40,6 +40,13 @@ const registerGame = (io: Server, socket: Socket) => {
 		handleDecade(game)
 	})
 
+	socket.on("discussionRequest", (params: roundParams) => {
+		const game = socketGameMap.get(socket.id)
+		if (!game || game.adminId !== socket.id) return
+		game.inDiscussion = true
+		io.to(game.socketRoom).emit("gameState", game.getGameState())
+	})
+
 	socket.on("decadeStartRequest", () => {
 		const game = socketGameMap.get(socket.id)
 		if (!game || game.adminId !== socket.id) return

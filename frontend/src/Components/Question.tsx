@@ -3,9 +3,7 @@ import { gameState } from "../types"
 import { useSocket } from "../App"
 import classNames from "classnames"
 import BottomRightButton from "./BottomRightButton"
-
-const stepsInMs = 20
-const totalTimeInSec = 30 - 1 // -1 for some delays
+import Progress from "./Progress"
 
 type questionOptions = "A" | "B" | "C" | "D"
 const possibilities: questionOptions[] = ["A", "B", "C", "D"]
@@ -13,21 +11,6 @@ const possibilities: questionOptions[] = ["A", "B", "C", "D"]
 export default function Question({ game }: { game: gameState }) {
 	const socket = useSocket()
 	const [vote, changeVote] = useState<questionOptions | null>(null)
-	const [progress, changeProgress] = useState(100)
-
-	useEffect(() => {
-		const a = setInterval(() => {
-			if (progress <= 0) {
-				clearInterval(a)
-				return
-			}
-			changeProgress(progress => Math.max(progress - (stepsInMs / 1000) * (100 / totalTimeInSec), 0))
-		}, stepsInMs)
-
-		return () => {
-			clearInterval(a)
-		}
-	})
 
 	const sendDecade = (awnser: questionOptions) => {
 		socket.emit("questionDecision", awnser)
@@ -41,15 +24,7 @@ export default function Question({ game }: { game: gameState }) {
 					Intermediate Question Decade {game.nextDecade + 1}
 				</h2>
 			</div>
-			<div className="w-full flex justify-center mb-3">
-				{!game.showQuestionSolution && (
-					<progress
-						className="progress progress-secondary h-4 max-w-sm"
-						value={progress}
-						max="100"
-					></progress>
-				)}
-			</div>
+			<div className="w-full flex justify-center mb-3">{!game.showQuestionSolution && <Progress />}</div>
 
 			<p className="my-10 text-2xl text-center">{game.currentQuestion!.question}</p>
 
@@ -63,7 +38,7 @@ export default function Question({ game }: { game: gameState }) {
 							"bg-success": game.showQuestionSolution && game.currentQuestion?.solution === p,
 							"bg-error": game.showQuestionSolution && game.currentQuestion?.solution !== p && vote === p,
 						})}
-						onClick={() => !game.showQuestionSolution && sendDecade(p)}
+						onClick={() => !game.showQuestionSolution && !vote && sendDecade(p)}
 					>
 						<div className="inline-flex">{game.currentQuestion![p]}</div>
 					</button>
@@ -75,7 +50,7 @@ export default function Question({ game }: { game: gameState }) {
 				</div>
 			)}
 			{game.showQuestionSolution && (
-				<BottomRightButton adminId={game.adminId} event="decadeStartRequest" title="Next" />
+				<BottomRightButton adminId={game.adminId} event="decadeStartRequest" title="Next" wait />
 			)}
 		</div>
 	)

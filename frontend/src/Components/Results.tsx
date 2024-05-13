@@ -41,7 +41,11 @@ export default function Results({ game }: { game: gameState }) {
 					</tbody>
 				</table>
 			</div>
-			<BottomRightButton adminId={game.adminId} event="gameStartRequest" title="Replay Game" />
+			{game.roundNr === 4 ? (
+				<div className="alert alert-info">This game is finished. Thank you for playing.</div>
+			) : (
+				<BottomRightButton adminId={game.adminId} event="discussionRequest" title="Next" />
+			)}
 		</div>
 	)
 }
