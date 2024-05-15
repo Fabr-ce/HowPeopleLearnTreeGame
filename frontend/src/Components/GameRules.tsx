@@ -16,7 +16,7 @@ export default function GameRules({ game }: { game: gameState }) {
 				<li className="step">
 					To achieve the goal you can choose the amount of trees (0-5) you want to chop during a decade.
 				</li>
-				<li className="step">The are {game.players.length * 3} trees available at the beginning.</li>
+				<li className="step">There are {game.players.length * 3} trees available at the beginning.</li>
 				<li className="step">
 					Luckily for you, the forest regenerates after every decade and the remaining trees double for the
 					next decade.

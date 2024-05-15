@@ -124,7 +124,7 @@ const getNextGameOptions = (game: gameState): [gameRoundOption, gameRoundOption]
 			type: "sendPolicePossible",
 			title: "Hire Police",
 			description:
-				"You agree on a rule that no chopper should chopp more than 3 trees in a decade. To enforce this rule you are able to hire the police for 1 tree. The police then checks if anyone violates the rule in this decade and fines this person with a penalty of 3 trees. The fines go to the government and NOT to the players.",
+				"You agree on a rule that no chopper should chopp more than 2 trees in a decade. To enforce this rule you are able to hire the police for 1 tree. The police then checks if anyone violates the rule in this decade and fines this person with a penalty of 3 trees. The fines go to the government and NOT to the players.",
 		})
 
 	const sayTreesPossible = game.roundParams.decadeResultsHidden && !game.roundParams.sayNumberOfTrees
