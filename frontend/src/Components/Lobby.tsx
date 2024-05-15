@@ -46,6 +46,10 @@ export default function Lobby({ game }: { game: gameState | null }) {
 				))}
 			</div>
 
+			<div className="alert alert-info my-2">
+				You can copy send the code: {gameId} to your friends to join the game!
+			</div>
+
 			<BottomRightButton adminId={game?.adminId} event="requestGameRules" title="Start Game" />
 		</div>
 	)
